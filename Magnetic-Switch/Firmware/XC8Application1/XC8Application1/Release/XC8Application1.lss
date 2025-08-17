@@ -1,0 +1,158 @@
+
+XC8Application1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000028  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800040  00800040  0000011a  2**0
+                  ALLOC, LOAD, DATA
+  2 .comment      0000002f  00000000  00000000  0000011a  2**0
+                  CONTENTS, READONLY
+  3 .stack.descriptors.hdr 0000000e  00000000  00000000  00000149  2**0
+                  CONTENTS, READONLY
+  4 .debug_info   000002ab  00000000  00000000  00000157  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000284  00000000  00000000  00000402  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000000d3  00000000  00000000  00000686  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000f6  00000000  00000000  00000759  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .text         00000002  00000028  00000028  0000009c  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000850  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .text.startup.main 00000060  0000002a  0000002a  0000009e  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 11 .text.__dummy_fini 00000002  0000008a  0000008a  000000fe  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 12 .text.__dummy_funcs_on_exit 00000002  0000008c  0000008c  00000100  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 13 .text.__dummy_simulator_exit 00000002  0000008e  0000008e  00000102  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 14 .text.exit    00000014  00000090  00000090  00000104  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 15 .text._Exit   00000002  000000a4  000000a4  00000118  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	12 c0       	rjmp	.+36     	; 0x28 <_etext>
+   4:	11 c0       	rjmp	.+34     	; 0x28 <_etext>
+   6:	10 c0       	rjmp	.+32     	; 0x28 <_etext>
+   8:	0f c0       	rjmp	.+30     	; 0x28 <_etext>
+   a:	0e c0       	rjmp	.+28     	; 0x28 <_etext>
+   c:	0d c0       	rjmp	.+26     	; 0x28 <_etext>
+   e:	0c c0       	rjmp	.+24     	; 0x28 <_etext>
+  10:	0b c0       	rjmp	.+22     	; 0x28 <_etext>
+  12:	0a c0       	rjmp	.+20     	; 0x28 <_etext>
+
+00000014 <__ctors_end>:
+  14:	11 27       	eor	r17, r17
+  16:	1f bf       	out	0x3f, r17	; 63
+  18:	cf e5       	ldi	r28, 0x5F	; 95
+  1a:	d0 e0       	ldi	r29, 0x00	; 0
+  1c:	de bf       	out	0x3e, r29	; 62
+  1e:	cd bf       	out	0x3d, r28	; 61
+  20:	04 d0       	rcall	.+8      	; 0x2a <main>
+  22:	36 c0       	rjmp	.+108    	; 0x90 <exit>
+
+00000024 <_exit>:
+  24:	f8 94       	cli
+
+00000026 <__stop_program>:
+  26:	ff cf       	rjmp	.-2      	; 0x26 <__stop_program>
+
+Disassembly of section .text:
+
+00000028 <__bad_interrupt>:
+  28:	eb cf       	rjmp	.-42     	; 0x0 <__TEXT_REGION_ORIGIN__>
+
+Disassembly of section .text.startup.main:
+
+0000002a <main>:
+  2a:	08 98       	cbi	0x01, 0	; 1
+  2c:	0a 9a       	sbi	0x01, 2	; 1
+  2e:	40 e0       	ldi	r20, 0x00	; 0
+  30:	50 e0       	ldi	r21, 0x00	; 0
+  32:	00 99       	sbic	0x00, 0	; 0
+  34:	14 c0       	rjmp	.+40     	; 0x5e <__SREG__+0x1f>
+  36:	41 13       	cpse	r20, r17
+  38:	19 c0       	rjmp	.+50     	; 0x6c <__stack+0xd>
+  3a:	51 13       	cpse	r21, r17
+  3c:	19 c0       	rjmp	.+50     	; 0x70 <__stack+0x11>
+  3e:	4f e3       	ldi	r20, 0x3F	; 63
+  40:	5d e0       	ldi	r21, 0x0D	; 13
+  42:	63 e0       	ldi	r22, 0x03	; 3
+  44:	41 50       	subi	r20, 0x01	; 1
+  46:	50 40       	sbci	r21, 0x00	; 0
+  48:	60 40       	sbci	r22, 0x00	; 0
+  4a:	e1 f7       	brne	.-8      	; 0x44 <__SREG__+0x5>
+  4c:	00 c0       	rjmp	.+0      	; 0x4e <__SREG__+0xf>
+  4e:	00 00       	nop
+  50:	40 b1       	in	r20, 0x00	; 0
+  52:	40 95       	com	r20
+  54:	41 70       	andi	r20, 0x01	; 1
+  56:	12 9a       	sbi	0x02, 2	; 2
+  58:	51 e0       	ldi	r21, 0x01	; 1
+  5a:	00 9b       	sbis	0x00, 0	; 0
+  5c:	ec cf       	rjmp	.-40     	; 0x36 <main+0xc>
+  5e:	00 99       	sbic	0x00, 0	; 0
+  60:	40 e0       	ldi	r20, 0x00	; 0
+  62:	51 13       	cpse	r21, r17
+  64:	f8 cf       	rjmp	.-16     	; 0x56 <__SREG__+0x17>
+  66:	12 98       	cbi	0x02, 2	; 2
+  68:	50 e0       	ldi	r21, 0x00	; 0
+  6a:	e3 cf       	rjmp	.-58     	; 0x32 <main+0x8>
+  6c:	41 e0       	ldi	r20, 0x01	; 1
+  6e:	f7 cf       	rjmp	.-18     	; 0x5e <__SREG__+0x1f>
+  70:	4f ef       	ldi	r20, 0xFF	; 255
+  72:	54 e3       	ldi	r21, 0x34	; 52
+  74:	6c e0       	ldi	r22, 0x0C	; 12
+  76:	41 50       	subi	r20, 0x01	; 1
+  78:	50 40       	sbci	r21, 0x00	; 0
+  7a:	60 40       	sbci	r22, 0x00	; 0
+  7c:	e1 f7       	brne	.-8      	; 0x76 <__stack+0x17>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <__stack+0x21>
+  80:	00 00       	nop
+  82:	40 b1       	in	r20, 0x00	; 0
+  84:	40 95       	com	r20
+  86:	41 70       	andi	r20, 0x01	; 1
+  88:	ee cf       	rjmp	.-36     	; 0x66 <__stack+0x7>
+
+Disassembly of section .text.__dummy_fini:
+
+0000008a <_fini>:
+  8a:	08 95       	ret
+
+Disassembly of section .text.__dummy_funcs_on_exit:
+
+0000008c <__funcs_on_exit>:
+  8c:	08 95       	ret
+
+Disassembly of section .text.__dummy_simulator_exit:
+
+0000008e <__simulator_exit>:
+  8e:	08 95       	ret
+
+Disassembly of section .text.exit:
+
+00000090 <exit>:
+  90:	c8 2f       	mov	r28, r24
+  92:	d9 2f       	mov	r29, r25
+  94:	fb df       	rcall	.-10     	; 0x8c <__funcs_on_exit>
+  96:	f9 df       	rcall	.-14     	; 0x8a <_fini>
+  98:	8c 2f       	mov	r24, r28
+  9a:	9d 2f       	mov	r25, r29
+  9c:	f8 df       	rcall	.-16     	; 0x8e <__simulator_exit>
+  9e:	8c 2f       	mov	r24, r28
+  a0:	9d 2f       	mov	r25, r29
+  a2:	00 d0       	rcall	.+0      	; 0xa4 <_Exit>
+
+Disassembly of section .text._Exit:
+
+000000a4 <_Exit>:
+  a4:	bf df       	rcall	.-130    	; 0x24 <_exit>
